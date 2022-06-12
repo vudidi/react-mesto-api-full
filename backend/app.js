@@ -17,7 +17,7 @@ const app = express();
 const allowedCors = [
   'https://vudidi-mesto.nomoreparties.sbs',
   'http://vudidi-mesto.nomoreparties.sbs',
-  'localhost:3000',
+  'http://localhost:3000',
 ];
 
 app.use((req, res, next) => {
