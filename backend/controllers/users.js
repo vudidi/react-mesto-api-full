@@ -32,45 +32,45 @@ const getUserById = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  const {
-    email, password, name, about, avatar,
-  } = req.body;
+  const { email, password, name, about, avatar } = req.body;
 
-  bcrypt.hash(password, 10).then((hash) => {
-    User.create({
-      name,
-      about,
-      avatar,
-      email,
-      password: hash,
-    })
-      .then((user) => {
-        res.status(201).send({
-          _id: user._id,
-          name: user.name,
-          about: user.about,
-          avatar: user.avatar,
-          email: user.email,
-        });
+  bcrypt
+    .hash(password, 10)
+    .then((hash) => {
+      User.create({
+        name,
+        about,
+        avatar,
+        email,
+        password: hash,
       })
-      .catch((err) => {
-        if (err.name === 'ValidationError') {
-          const fields = Object.keys(err.errors).join(', ');
-          return next(
-            new BadRequestError(
-              `Переданы некорректные данные при создании пользователя: ${fields}`,
-            ),
-          );
-        }
-        if (err.code === 11000) {
-          return next(
-            new ConflictError('Пользователь с такой почтой уже существует'),
-          );
-        }
+        .then((user) => {
+          res.status(201).send({
+            _id: user._id,
+            name: user.name,
+            about: user.about,
+            avatar: user.avatar,
+            email: user.email,
+          });
+        })
+        .catch((err) => {
+          if (err.name === 'ValidationError') {
+            const fields = Object.keys(err.errors).join(', ');
+            return next(
+              new BadRequestError(
+                `Переданы некорректные данные при создании пользователя: ${fields}`,
+              ),
+            );
+          }
+          if (err.code === 11000) {
+            return next(
+              new ConflictError('Пользователь с такой почтой уже существует'),
+            );
+          }
 
-        return next(new ServerError('Произошла ошибка'));
-      });
-  })
+          return next(new ServerError('Произошла ошибка'));
+        });
+    })
     .catch(next);
 };
 
@@ -84,12 +84,14 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 7,
-          httpOnly: true,
-        })
-        .send({ token });
+
+      res.send({ token });
+      // res
+      //   .cookie('jwt', token, {
+      //     maxAge: 3600000 * 24 * 7,
+      //     httpOnly: true,
+      //   })
+      //   .send({ token });
     })
     .catch(next);
 };
