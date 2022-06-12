@@ -1,22 +1,22 @@
-import React from "react";
-import { Route, Redirect, Switch, useHistory } from "react-router-dom";
-import ProtectedRoute from "./ProtectedRoute";
-import Header from "./Header";
-import Footer from "./Footer";
-import Main from "./Main";
-import PopupWithForm from "./PopupWithForm";
-import EditProfilePopup from "./EditProfilePopup";
-import EditAvatarPopup from "./EditAvatarPopup";
-import AddPlacePopup from "./AddPlacePopup";
-import ImagePopup from "./ImagePopup";
-import InfoTooltip from "./InfoTooltip";
-import Login from "./Login";
-import Register from "./Register";
-import api from "../utils/Api";
-import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import * as Auth from "../utils/Auth";
-import iconErrorPath from "../styles/images/reg-icon-error.png";
-import iconSuccessPath from "../styles/images/reg-icon-success.png";
+import React from 'react';
+import { Route, Redirect, Switch, useHistory } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import Header from './Header';
+import Footer from './Footer';
+import Main from './Main';
+import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
+import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
+import Login from './Login';
+import Register from './Register';
+import api from '../utils/Api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import * as Auth from '../utils/Auth';
+import iconErrorPath from '../styles/images/reg-icon-error.png';
+import iconSuccessPath from '../styles/images/reg-icon-success.png';
 
 function App() {
   const [isEditProfilePopupOpen, setOpenEditProfile] = React.useState(false);
@@ -27,7 +27,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  const [userEmail, setUserEmail] = React.useState("");
+  const [userEmail, setUserEmail] = React.useState('');
   const [isBurgerMenuOpen, setBurgerMenuOpen] = React.useState(false);
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
   const [isRegistrationSuccess, setRegistrationSuccess] = React.useState(null);
@@ -40,7 +40,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      history.push("/");
+      history.push('/');
       Promise.all([api.getCards(), api.getProfile()])
         .then(([cardsData, userData]) => {
           setCards(cardsData);
@@ -50,7 +50,7 @@ function App() {
           console.log(err);
         });
     }
-  }, [loggedIn]);
+  }, [loggedIn, history]);
 
   function handleAddPlaceSubmit(data) {
     api
@@ -145,7 +145,7 @@ function App() {
         setInfoTooltipOpen(true);
         setTimeout(() => {
           setInfoTooltipOpen(false);
-          history.push("/sign-in");
+          history.push('/sign-in');
         }, 1500);
       })
       .catch((err) => {
@@ -158,10 +158,10 @@ function App() {
   function handleLoginUser(data) {
     Auth.authorize(data.email, data.password)
       .then((res) => {
-        localStorage.setItem("token", res.token);
+        localStorage.setItem('token', res.token);
         tokenCheck();
         setLoggedIn(true);
-        history.push("/");
+        history.push('/');
       })
       .catch((err) => {
         setLoginSuccess(false);
@@ -171,8 +171,9 @@ function App() {
   }
 
   function tokenCheck() {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      console.log('token ', token);
       Auth.getContent(token)
         .then((res) => {
           if (res) {
@@ -187,8 +188,8 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("token");
-    history.push("/sign-in");
+    localStorage.removeItem('token');
+    history.push('/sign-in');
     setLoggedIn(false);
   }
 
@@ -252,8 +253,8 @@ function App() {
               infoIcon={isLoginSuccess ? iconSuccessPath : iconErrorPath}
               infoMessage={
                 isLoginSuccess
-                  ? "Вы успешно зарегистрировались!"
-                  : "Что-то пошло не так! Попробуйте ещё раз."
+                  ? 'Вы успешно зарегистрировались!'
+                  : 'Что-то пошло не так! Попробуйте ещё раз.'
               }
             />
           </Route>
@@ -267,8 +268,8 @@ function App() {
               infoIcon={isRegistrationSuccess ? iconSuccessPath : iconErrorPath}
               infoMessage={
                 isRegistrationSuccess
-                  ? "Вы успешно зарегистрировались!"
-                  : "Что-то пошло не так! Попробуйте ещё раз."
+                  ? 'Вы успешно зарегистрировались!'
+                  : 'Что-то пошло не так! Попробуйте ещё раз.'
               }
             />
           </Route>
