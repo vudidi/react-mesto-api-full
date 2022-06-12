@@ -18,7 +18,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "npm run build && scp -r ./build/* vudidi-mesto@51.250.110.26:/home/vudidi-mesto/react-mesto-api-full/frontend"
   },
   "eslintConfig": {
     "extends": [
