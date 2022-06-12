@@ -2,7 +2,7 @@ require('dotenv').config();
 const cookieParser = require('cookie-parser');
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -14,7 +14,21 @@ const { pageNotFound } = require('./utils/pageNotFound');
 
 const app = express();
 
-app.use(cors());
+const allowedCors = [
+  'https://vudidi-mesto.nomoreparties.sbs',
+  'http://vudidi-mesto.nomoreparties.sbs',
+  'localhost:3000',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
+
+// app.use(cors());
 
 const { PORT = 3000 } = process.env;
 

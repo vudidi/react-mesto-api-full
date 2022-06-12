@@ -158,6 +158,7 @@ function App() {
   function handleLoginUser(data) {
     Auth.authorize(data.email, data.password)
       .then((res) => {
+        console.log('res ', res);
         localStorage.setItem('token', res.token);
         tokenCheck();
         setLoggedIn(true);
@@ -173,7 +174,6 @@ function App() {
   function tokenCheck() {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
-      console.log('token ', token);
       Auth.getContent(token)
         .then((res) => {
           if (res) {
