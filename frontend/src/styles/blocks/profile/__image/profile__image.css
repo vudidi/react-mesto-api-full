@@ -1,0 +1,38 @@
+.profile__image {
+  width: 120px;
+  height: 120px;
+  background: no-repeat center url('https://yt3.ggpht.com/a/AATXAJyQiYFu3-VoLKjggkaJPgUK5eJhY7B7Oe6mmuX31g=s900-c-k-c0xffffffff-no-rj-mo');
+  background-size: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: linear 0.3s;
+  position: relative;
+}
+
+.profile__image::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  transition: linear 0.3s;
+  opacity: 0;
+}
+.profile__image::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: no-repeat center url(../../../images/button-edit.svg);
+  background-size: 26px 26px;
+  transition: linear 0.3s;
+  opacity: 0;
+}
+
+.profile__image:hover::before {
+  opacity: 1;
+}
+.profile__image:hover::after {
+  opacity: 1;
+}

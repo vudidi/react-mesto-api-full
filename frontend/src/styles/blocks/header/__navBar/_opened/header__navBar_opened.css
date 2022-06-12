@@ -1,0 +1,15 @@
+@media screen and (max-width: 768px) {
+  .header__navBar_opened {
+    display: flex;
+    animation-name: showBurger;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+  }
+}
+
+@keyframes showBurger {
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

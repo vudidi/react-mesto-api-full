@@ -1,0 +1,17 @@
+.header__navBar {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 768px) {
+  .header__navBar {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 46px 0 38px 0;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.7);
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}

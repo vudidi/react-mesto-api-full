@@ -1,0 +1,31 @@
+.card {
+  max-width: 282px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0;
+  position: relative;
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    max-width: 362px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .card {
+    max-width: 282px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .card {
+    max-width: 362px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    max-width: 282px;
+  }
+}

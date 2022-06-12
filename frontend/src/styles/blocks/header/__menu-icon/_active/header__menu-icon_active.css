@@ -1,0 +1,14 @@
+.header__menu-icon_active span {
+  top: 50%;
+  transform: scale(0) translate(0px, -50%);
+}
+
+.header__menu-icon_active::before {
+  top: 50%;
+  transform: rotate(-45deg) translate(0px, -50%);
+}
+
+.header__menu-icon_active::after {
+  bottom: 50%;
+  transform: rotate(45deg) translate(0px, 50%);
+}

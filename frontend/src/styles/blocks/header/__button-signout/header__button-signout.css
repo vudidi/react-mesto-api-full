@@ -1,0 +1,22 @@
+.header__button-signout {
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+  transition: linear 0.3s;
+  background: transparent;
+  padding: 0 0 28px 24px; 
+  border: none;
+}
+
+.header__button-signout:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .header__button-signout {
+    padding: 12px 0 0 0;
+  }
+}
+
