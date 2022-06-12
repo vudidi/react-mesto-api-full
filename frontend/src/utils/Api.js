@@ -96,7 +96,7 @@ const api = new Api({
   headers: {
     'Content-Type': 'application/json',
   },
-  credentials: true,
+  credentials: 'include',
 });
 
 export default api;
