@@ -80,9 +80,11 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    // console.log('card', card._id);
     api
-      .deleteCard(card._id)
+      .deleteCard(card._id, token)
       .then((cardItem) => {
+        console.log('cardItem', cardItem);
         setCards((arr) => arr.filter((c) => c._id !== card._id && cardItem));
       })
       .catch((err) => {

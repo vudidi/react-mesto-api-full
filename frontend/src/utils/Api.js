@@ -61,10 +61,10 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  removeLike(id) {
+  removeLike(id, token) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then(this._checkResponse);
   }
 
@@ -76,10 +76,10 @@ class Api {
     }
   }
 
-  deleteCard(id) {
+  deleteCard(id, token) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then(this._checkResponse);
   }
 
