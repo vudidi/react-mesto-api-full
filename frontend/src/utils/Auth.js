@@ -1,10 +1,11 @@
-export const BASE_URL = 'https://api.vudidi-mesto.nomoredomains.xyz';
+import React from "react";
+
+export const BASE_URL = "https://auth.nomoreparties.co";
 
 export function register(email, password) {
   return fetch(`${BASE_URL}/signup`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       email,
       password,
@@ -14,9 +15,8 @@ export function register(email, password) {
 
 export function authorize(email, password) {
   return fetch(`${BASE_URL}/signin`, {
-    method: 'POST',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       email,
       password,
@@ -26,10 +26,9 @@ export function authorize(email, password) {
 
 export function getContent(token) {
   return fetch(`${BASE_URL}/users/me`, {
-    method: 'GET',
-    credentials: 'include',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
