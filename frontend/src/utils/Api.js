@@ -48,16 +48,16 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  getLikes() {
+  getLikes(token) {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then(this._checkResponse);
   }
 
-  likeCard(id) {
+  likeCard(id, token) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
-      headers: this._headers,
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
     }).then(this._checkResponse);
   }
 
@@ -68,11 +68,11 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  changeLikeCardStatus(id, isLiked) {
+  changeLikeCardStatus(id, isLiked, token) {
     if (isLiked) {
-      return this.removeLike(id);
+      return this.removeLike(id, token);
     } else {
-      return this.likeCard(id);
+      return this.likeCard(id, token);
     }
   }
 
