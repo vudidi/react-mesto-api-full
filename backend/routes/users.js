@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
+const { validateURL } = require('../utils/JoiCustomValidator');
 const auth = require('../middlewares/auth');
 const {
   getUsers,
@@ -17,7 +18,7 @@ router.post(
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string().uri(),
+      avatar: Joi.string().custom(validateURL, 'custom validation'),
       email: Joi.string().required().email(),
       password: Joi.string().required(),
     }),
@@ -63,7 +64,7 @@ router.patch(
   auth,
   celebrate({
     body: Joi.object().keys({
-      avatar: Joi.string().uri(),
+      avatar: Joi.string().custom(validateURL, 'custom validation'),
     }),
   }),
   updateUserAvatar,
