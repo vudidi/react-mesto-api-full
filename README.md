@@ -5,3 +5,4 @@
 
 `Backend` https://github.com/vudidi/express-mesto-gha
 
+[Ссылка на проект на ванильном JS](https://github.com/vudidi/mesto)
